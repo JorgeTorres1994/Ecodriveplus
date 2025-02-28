@@ -1,0 +1,55 @@
+/* Hacer la tabla responsive en pantallas pequeñas */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Centrar los botones en la celda de acciones */
+.acciones {
+    text-align: center; /* Asegura que el contenido se centre */
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre botones */
+}
+
+/* Ajustar el tamaño de la tabla en móviles */
+@media (max-width: 768px) {
+    .table th, .table td {
+        white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+        font-size: 14px; /* Reduce el tamaño del texto */
+        padding: 8px; /* Ajusta el espacio en celdas */
+    }
+
+    .table th {
+        font-size: 14px; /* Reduce tamaño de encabezados */
+    }
+
+    /* Botones compactos */
+    .btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    /* Evitar que los botones se desborden */
+    .acciones {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .acciones a {
+        width: 100%; /* Ocupan todo el ancho */
+    }
+    
+}
+
+/* En pantallas muy pequeñas (teléfonos) */
+@media (max-width: 480px) {
+    .table th, .table td {
+        font-size: 12px; /* Texto más pequeño en celulares */
+        padding: 6px;
+    }
+
+    .btn {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+}
