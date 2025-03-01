@@ -9,6 +9,15 @@ class PremioModel extends Model
     protected $table = 'premios';
     protected $primaryKey = 'id';
     protected $allowedFields = ['imagen', 'titulo', 'descripcion', 'tipo', 'dia'];
+    protected $useAutoIncrement = true; // Para evitar conflictos con IDs
+    protected $useTimestamps = false; // Desactiva timestamps si no los usas
+
+    // ✅ Método para paginar premios correctamente
+    public function obtenerPremiosPaginados($perPage = 5)
+    {
+        return $this->paginate($perPage, 'default');
+    }
+
 
     // Obtener todos los premios
     public function getAllPremios()

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
@@ -6,17 +7,21 @@ use App\Models\PremioModel;
 
 class PremiosController extends Controller
 {
-    public function premios(){    
-    $premioModel = new PremioModel();
-        $premios = $premioModel->getAllPremios(); // 🔥 Solo los datos
+    public function premios()
+    {
+        $premioModel = new PremioModel();
 
-        // Retornar JSON si la solicitud es AJAX o se solicita JSON explícitamente
+        // ✅ Obtener premios paginados
+        $data['premios'] = $premioModel->paginate(5); // Muestra 5 premios por página
+        $data['pager'] = $premioModel->pager; // Objeto de paginación
+
+        // ✅ Si la solicitud es AJAX o JSON, retorna los datos completos
         if ($this->request->isAJAX() || strpos($this->request->getHeaderLine('Accept'), 'application/json') !== false) {
-            return $this->response->setStatusCode(200)->setJSON($premios);
+            return $this->response->setStatusCode(200)->setJSON($premioModel->findAll());
         }
 
-        // Retornar la vista con los premios
-        return view('admin/premios_list', ['title' => "Gestión de Premios", 'premios' => $premios]);
+        // ✅ Retornar la vista con paginación
+        return view('admin/premios_list', $data);
     }
 
     public function nuevoPremio()
